@@ -14,7 +14,20 @@ def deps do
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/ex_app_info](https://hexdocs.pm/ex_app_info).
+## Usage
 
+Get a version:
+
+```
+$ mix ex_app_info.version.get
+0.2.0
+```
+
+Set a version:
+
+```
+$ mix ex_app_info.version.set 0.3.0
+version updated: 0.2.0 to 0.3.0
+```
+
+(more CI helpers to come...)
