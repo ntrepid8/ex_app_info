@@ -1,6 +1,9 @@
-defmodule Mix.Tasks.ExAppInfo.Set do
+defmodule Mix.Tasks.ExAppInfo.Version.Set do
   @moduledoc """
   Set the project version with the given argument.
+  ```
+  Usage: mix ex_app_info.version.set NEW_VERSION
+  ```
   """
   use Mix.Task
 
@@ -30,13 +33,13 @@ defmodule Mix.Tasks.ExAppInfo.Set do
   defp handle_parsed_options({_parsed, [raw_new_version|_], _invalid}) do
     case Version.parse(raw_new_version) do
       :error -> "invalid new_version: #{inspect raw_new_version}"
-      {:ok, new_version}
+      {:ok, new_version} -> handle_new_version(new_version)
     end
   end
 
   defp handle_new_version(new_version) do
     with project_config <- Mix.Project.config(),
-         old_version <- Keyword.get(:version),
+         old_version <- Keyword.get(project_config, :version),
          :ok <- update_mix_exs(new_version),
       do: {:ok, {old_version, new_version}}
   end
