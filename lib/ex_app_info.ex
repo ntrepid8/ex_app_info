@@ -6,16 +6,4 @@ defmodule ExAppInfo do
   for integration with CI systems like Jenkins or Travis.
   """
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> ExAppInfo.hello
-      :world
-
-  """
-  def hello do
-    :world
-  end
 end
