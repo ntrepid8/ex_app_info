@@ -12,7 +12,10 @@ defmodule Mix.Tasks.ExAppInfo.Version.Set do
   """
   use Mix.Task
 
+  # task properties
   @shortdoc "set the project version"
+
+  # other properties
   @mix_exs "mix.exs"
   @project_version_re ~r/version:[ ]*"([a-zA-Z0-9-\.\+]+)"/
 
@@ -82,4 +85,5 @@ defmodule Mix.Tasks.ExAppInfo.Version.Set do
          new_data = Regex.replace(@project_version_re, data, "version: \"#{new_version}\""),
       do: File.write(@mix_exs, new_data)
   end
+
 end

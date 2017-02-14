@@ -7,6 +7,7 @@ defmodule Mix.Tasks.ExAppInfo.Version.Get do
   """
   use Mix.Task
 
+  # task properties
   @shortdoc "print the project version"
 
   def run(_args) do
