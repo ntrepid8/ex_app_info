@@ -3,7 +3,7 @@ defmodule ExAppInfo.Mixfile do
 
   def project do
     [app: :ex_app_info,
-     version: "0.2.0",
+     version: "0.3.0",
      elixir: "~> 1.2",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
@@ -27,7 +27,7 @@ defmodule ExAppInfo.Mixfile do
 
   # dependencies
   defp deps do
-    [{:ex_doc, "~> 0.14", only: :dev}]
+    [{:ex_doc, "~> 0.15", only: :dev}]
   end
 
   defp description do
