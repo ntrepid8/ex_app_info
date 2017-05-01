@@ -15,10 +15,6 @@ defmodule Mix.Tasks.ExAppInfo.Version.Set do
   # task properties
   @shortdoc "set the project version"
 
-  # other properties
-  @mix_exs "mix.exs"
-  @project_version_re ~r/version:[ ]*"([a-zA-Z0-9-\.\+]+)"/
-
   def run(args) do
     op_opts = [
       strict: [strict: :boolean, exact: :boolean],
@@ -62,7 +58,7 @@ defmodule Mix.Tasks.ExAppInfo.Version.Set do
          old_version <- Keyword.get(project_config, :version),
          :ok <- parse_strict_version(parsed_new_version, old_version, strict),
          {:ok, new_version} <- parse_exact_version(parsed_new_version, raw_new_version, exact),
-         :ok <- update_mix_exs(new_version),
+         :ok <- ExAppInfo.update_mix_exs_version(new_version),
       do: {:ok, {old_version, new_version}}
   end
 
@@ -78,12 +74,5 @@ defmodule Mix.Tasks.ExAppInfo.Version.Set do
   ## return the parsed version or the raw version, depending on options passed
   defp parse_exact_version(parsed_version, _raw_version, false), do: {:ok, parsed_version}
   defp parse_exact_version(_parsed_version, raw_version, true), do: {:ok, raw_version}
-
-  ## replace the text in mix.exs with a regular expression
-  defp update_mix_exs(new_version) do
-    with {:ok, data} <- File.read(@mix_exs),
-         new_data = Regex.replace(@project_version_re, data, "version: \"#{new_version}\""),
-      do: File.write(@mix_exs, new_data)
-  end
 
 end
